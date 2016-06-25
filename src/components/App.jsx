@@ -5,7 +5,7 @@ class App extends React.Component {
 
     this.state = {
       video: this.props.videos[0],
-      videos: this.props.videos
+      videos: this.props.videos.slice(1)
     };
   }
 
@@ -13,13 +13,13 @@ class App extends React.Component {
   //event handler for changing state
 
   _changeVideo (targetVid) {
-    // let vids = this.state.videos;
+    let vids = this.props.videos;
 
-    // let index = vids.indexOf(targetVid);
+    let index = vids.indexOf(targetVid);
 
     this.setState({
-      video: targetVid
-      // videos: vids.slice(0, index).concat(vids.slice(index + 1))
+      video: targetVid,
+      videos: vids.slice(0, index).concat(vids.slice(index + 1))
     });
   }
 
