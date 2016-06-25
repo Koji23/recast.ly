@@ -1,13 +1,16 @@
-var searchYouTube = ({query = 'kanye west', max = 5, key = 'AIzaSyAnrZXeqOxSVkRef0Fa9nKLXugFM-jEiiE'}, callback = () => {} ) => {
+var searchYouTube = ({query = 'kanye west', max = 5, key = YOUTUBE_API_KEY}, callback = () => {} ) => {
   //url
-  var url = "https://www.googleapis.com/youtube/v3/videos?" + "key=" + YOUTUBE_API_KEY;
-  // url += query.split(' ').join('%20') + '&';
-  // url += 'maxResults=' + max + '&';
-  // // url += 'videoEmbeddable=true' + '&';
-  // url += 'key=' + key;
+  var url = "https://www.googleapis.com/youtube/v3/search?";
+  url += 'part=snippet';
+  url += '&maxResults=' + max;
+  url += '&q=' + query.split(' ').join('+');
+  url += '&type=video';
+  url += '&videoEmbeddable=true';
+  url += '&key=' + key;
 
+  console.log(url)
   $.get(url, function(data) {
-    return data;
+    callback(data.items)
   });
 };
 
