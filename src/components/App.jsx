@@ -5,28 +5,50 @@ class App extends React.Component {
 
     this.state = {
       video: this.props.videos[0],
-      videos: this.props.videos.slice(1)
+      videos: this.props.videos.slice(1),
+      query: ''
     };
   }
 
-  //initilization fn setState
-  //event handler for changing state
-
   _changeVideo (targetVid) {
-    let vids = this.props.videos;
-
-    let index = vids.indexOf(targetVid);
+    let allVideos = this.state.videos;
+    allVideos.push(this.state.video);
+    let index = allVideos.indexOf(targetVid);
+    allVideos.splice(index, 1);
 
     this.setState({
       video: targetVid,
-      videos: vids.slice(0, index).concat(vids.slice(index + 1))
+      videos: allVideos
     });
   }
+
+  _changeVideos() {
+    var options = {
+      query: this.state.query
+    };
+
+    searchYouTube(options, function(newVideos) {
+      this.setState({
+        video: newVideos[0],
+        videos: newVideos.slice(1) });
+    }.bind(this));
+  }
+
+  _changeQuery(searchValue) {
+    this.setState({
+      query: searchValue
+    });
+  }
+
+  //wrapper method (fetch nav bar)
+    //youtube fetch
+      //update state
+
 
   render() {
     return (
       <div>
-        <Nav />
+        <Nav captureInput={this._changeQuery.bind(this)} captureSearch={this._changeVideos.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.video}/>
         </div>

@@ -14,7 +14,7 @@ var VideoListEntry = (props) => (
 // Warnings will be shown in the console when the defined rules are violated
 VideoListEntry.propTypes = {
   video: React.PropTypes.object.isRequired,
-  cv: React.propTypes.func
+  // cv: React.propTypes.func
 };
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope

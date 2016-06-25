@@ -8,15 +8,11 @@ var searchYouTube = ({query = 'kanye west', max = 5, key = YOUTUBE_API_KEY}, cal
   url += '&videoEmbeddable=true';
   url += '&key=' + key;
 
-  console.log(url)
   $.get(url, function(data) {
-    callback(data.items)
+    callback(data.items);
   });
 };
 
 window.searchYouTube = searchYouTube;
 
-searchYouTube({}, function(data) {
-  console.log(JSON.stringify(data));
-});
 
