@@ -27,7 +27,7 @@ class App extends React.Component {
       query: this.state.query
     };
 
-    searchYouTube(options, function(newVideos) {
+    this.props.searchYouTube(options, function(newVideos) {
       this.setState({
         video: newVideos[0],
         videos: newVideos.slice(1) });
@@ -35,6 +35,7 @@ class App extends React.Component {
   }
 
   _changeQuery(searchValue) {
+    console.log(searchValue)
     this.setState({
       query: searchValue
     });
