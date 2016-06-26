@@ -2,12 +2,16 @@
 class App extends React.Component {
   constructor(props) {
     super(props);
-
+  
     this.state = {
       video: this.props.videos[0],
       videos: this.props.videos.slice(1),
       query: ''
     };
+  }
+
+  componentDidMount () {
+    this.liveChangeVideos = _.debounce(this._changeVideos, 500);
   }
 
   _changeVideo (targetVid) {
@@ -35,16 +39,11 @@ class App extends React.Component {
   }
 
   _changeQuery(searchValue) {
-    console.log(searchValue)
     this.setState({
       query: searchValue
     });
+    this.liveChangeVideos();
   }
-
-  //wrapper method (fetch nav bar)
-    //youtube fetch
-      //update state
-
 
   render() {
     return (
